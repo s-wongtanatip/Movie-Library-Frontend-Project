@@ -6,15 +6,18 @@ type Props = {
   title: string;
   poster_path: string;
   card_per_carousel: number;
+  id: number;
 };
 
-const MovieCard = ({ title, poster_path, card_per_carousel }: Props) => {
+const MovieCard = ({ title, poster_path, card_per_carousel, id }: Props) => {
 
   const movie_card_width = window.innerWidth / (card_per_carousel + 1);
 
   return (
     <div>
-        <a href="#">
+        <a href="" onClick={(e)=>{
+          e.preventDefault()
+          console.log(id)}}>
           <img
             src={`${baseUrl}${posterSize}${poster_path}`}
             alt={title}

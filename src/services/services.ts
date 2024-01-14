@@ -1,8 +1,11 @@
 import axios from "axios";
-import { handleResponse } from "../util/handleResponse";
-import { IResponse } from "../util/handleResponse";
+import {
+  IResponseDetail,
+  handleDetailResponse,
+  handleListResponse,
+} from "../util/handleResponse";
+import { IResponseList } from "../util/handleResponse";
 import { genreConvertToId } from "../util/movieGenreList";
-
 
 const headerConfig = {
   headers: {
@@ -12,29 +15,41 @@ const headerConfig = {
   },
 };
 
-const getPopularMovieList = async (): Promise<IResponse> => {
+const getPopularMovieList = async (): Promise<IResponseList> => {
   try {
     const result = await axios.get(
       "https://api.themoviedb.org/3/movie/popular?language=en-US&page=1",
       headerConfig
     );
-    return handleResponse.success(result);
+    return handleListResponse.success(result);
   } catch (error: any) {
-    return handleResponse.error(error);
+    return handleListResponse.error(error);
   }
 };
 
-const getMovieListByGenre = async (genre: string): Promise<IResponse> => {
-    const genreId = genreConvertToId(genre)
-    try {
-      const result = await axios.get(
-        `https://api.themoviedb.org/3/discover/movie?include_adult=false&include_video=false&language=en-US&page=1&sort_by=popularity.desc&with_genres=${genreId}`,
-        headerConfig
-      );
-      return handleResponse.success(result);
-    } catch (error: any) {
-      return handleResponse.error(error);
-    }
-  };
+const getMovieListByGenre = async (genre: string): Promise<IResponseList> => {
+  const genreId = genreConvertToId(genre);
+  try {
+    const result = await axios.get(
+      `https://api.themoviedb.org/3/discover/movie?include_adult=false&include_video=false&language=en-US&page=1&sort_by=popularity.desc&with_genres=${genreId}`,
+      headerConfig
+    );
+    return handleListResponse.success(result);
+  } catch (error: any) {
+    return handleListResponse.error(error);
+  }
+};
 
-export { getPopularMovieList, getMovieListByGenre };
+const getMovieDetailFromId = async (id: number): Promise<IResponseDetail> => {
+  try {
+    const result = await axios.get(
+      `https://api.themoviedb.org/3/movie/${id}?language=en-US`,
+      headerConfig
+    );
+    return handleDetailResponse.success(result);
+  } catch (error: any) {
+    return handleDetailResponse.error(error);
+  }
+};
+
+export { getPopularMovieList, getMovieListByGenre, getMovieDetailFromId };

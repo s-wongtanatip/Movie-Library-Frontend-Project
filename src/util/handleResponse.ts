@@ -1,7 +1,7 @@
 import { AxiosError, AxiosResponse } from "axios";
-import { IMovieList } from "../services/interface";
+import { IMovieDetail, IMovieList } from "../services/interface";
 
-export interface IResponse {
+export interface IResponseList {
   status: number | undefined;
   data?: {
     page: number;
@@ -12,8 +12,8 @@ export interface IResponse {
   err?: AxiosResponse<any, any> | undefined;
 }
 
-const handleResponse = {
-  success: (res: AxiosResponse): IResponse => {
+const handleListResponse = {
+  success: (res: AxiosResponse): IResponseList => {
     return {
       status: res.status,
       data: res.data,
@@ -27,4 +27,25 @@ const handleResponse = {
   },
 };
 
-export { handleResponse };
+export interface IResponseDetail {
+  status: number | undefined;
+  data?: IMovieDetail,
+  err?: AxiosResponse<any, any> | undefined;
+}
+
+const handleDetailResponse = {
+  success: (res: AxiosResponse): IResponseDetail => {
+    return {
+      status: res.status,
+      data: res.data,
+    };
+  },
+  error: (res: AxiosError<AxiosResponse>) => {
+    return {
+      status: res.response?.status,
+      err: res.response?.data,
+    };
+  },
+};
+
+export { handleListResponse, handleDetailResponse };

@@ -1,9 +1,8 @@
-import { IMovieList } from "../../services/interface";
-import MovieCard from "../movieCard";
+import { IMovieList } from "../services/interface";
+import MovieCard from "./movieCard";
 import { IoIosArrowBack, IoIosArrowForward } from "react-icons/io";
 import { useState } from "react";
-import { useContext } from "react";
-import { IMovieListLandingPage } from "../../pages/landingPage/landingPage";
+import { IMovieListLandingPage } from "../pages/landingPage/landingPage";
 
 // Define card per panel for calculating MovieCard width
 // const card_per_carousel = 8;
@@ -48,7 +47,7 @@ const CarouselSection = ({ movies, card_per_carousel, category, isLoading }: Pro
   }
 
   return (
-    <section>
+    <section className="mb-16">
       <div className="text-3xl font-bold ml-10 mb-6 mt-16 capitalize">
         {category} list
       </div>
@@ -69,9 +68,9 @@ const CarouselSection = ({ movies, card_per_carousel, category, isLoading }: Pro
             }}
           >
             {isLoading
-              ? cardCountArray.map(() => {
+              ? cardCountArray.map((num) => {
                   return (
-                    <div className="bg-gray-800 w-[200px] aspect-[2/3]"></div>
+                    <div key={num} className="bg-gray-800 w-[200px] aspect-[2/3] animate-pulse"></div>
                   );
                 })
               : movies.map((movie) => {
@@ -81,6 +80,7 @@ const CarouselSection = ({ movies, card_per_carousel, category, isLoading }: Pro
                       title={movie.title}
                       poster_path={movie.poster_path}
                       card_per_carousel={card_per_carousel}
+                      id={movie.id}
                     />
                   );
                 })}
