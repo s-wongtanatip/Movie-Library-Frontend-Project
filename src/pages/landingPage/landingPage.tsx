@@ -1,4 +1,4 @@
-import { createContext, useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import {
   getMovieListByGenre,
   getPopularMovieList,
@@ -12,8 +12,6 @@ export interface IMovieListLandingPage {
   action: IMovieList[];
   adventure: IMovieList[];
 }
-
-export const isLoadingContext = createContext(false);
 
 const LandingPage = () => {
   const [movies, setMovies] = useState<IMovieListLandingPage>({
@@ -33,12 +31,12 @@ const LandingPage = () => {
         action: actionMovie.data.results,
         adventure: adventureMovie.data.results,
       });
-    //   setIsLoading(false);
+      setIsLoading(false);
     }
   };
 
   useEffect(() => {
-    // setIsLoading(true);
+    setIsLoading(true);
     callData();
   }, []);
 
@@ -52,28 +50,29 @@ const LandingPage = () => {
 
   return (
     <>
-      <isLoadingContext.Provider value={isLoading}>
         <header>
           <NavBar />
         </header>
         <main>
           <CarouselSection
             movies={movies.popular}
-            cardNumber={9}
+            card_per_carousel={9}
             category="popular"
+            isLoading={isLoading}
           />
           <CarouselSection
             movies={movies.action}
-            cardNumber={9}
+            card_per_carousel={9}
             category="action"
+            isLoading={isLoading}
           />
           <CarouselSection
             movies={movies.adventure}
-            cardNumber={9}
+            card_per_carousel={9}
             category="adventure"
+            isLoading={isLoading}
           />
         </main>
-      </isLoadingContext.Provider>
     </>
   );
 };
