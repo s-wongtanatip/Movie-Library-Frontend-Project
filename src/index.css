@@ -11,6 +11,10 @@ body{
     color: white;
 }
 
+#movieCard *{
+    color: inherit;
+}
+
 body::-webkit-scrollbar {
     display: none;
 }

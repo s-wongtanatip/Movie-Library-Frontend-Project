@@ -1,4 +1,4 @@
-import { IMovieList } from "../services/interface";
+import { IMovieList } from "../util/interface";
 import MovieCard from "./movieCard";
 import { IoIosArrowBack, IoIosArrowForward } from "react-icons/io";
 import { useState } from "react";

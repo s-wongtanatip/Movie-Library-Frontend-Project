@@ -1,3 +1,6 @@
+import { useEffect, useState } from "react";
+import { FaHeart } from "react-icons/fa";
+import { useFavList } from "../App";
 
 const baseUrl = "http://image.tmdb.org/t/p/";
 const posterSize = "w780"; // [ "w92", "w154", "w185", "w342", "w500", "w780", "original" ]
@@ -10,20 +13,58 @@ type Props = {
 };
 
 const MovieCard = ({ title, poster_path, card_per_carousel, id }: Props) => {
+  const { state, setState } = useFavList();
+  const favList = state
+  const setFavList = setState
+  const [isHovered, setIsHovered] = useState<boolean>(false);
+  const [isLiked, setIsLiked] = useState<boolean>();
+
+  useEffect(()=>{
+    if (favList.includes(id)){
+      setIsLiked(true)
+    } else {
+      setIsLiked(false)
+    }
+  },[favList])
+
+  const likeUnlikeFunction = () => {
+    if(isLiked){
+      setFavList(favList.filter(x => x != id))
+    } else{
+      setFavList([...favList, id])
+    }
+    setIsLiked(liked => !liked)
+  }
 
   const movie_card_width = window.innerWidth / (card_per_carousel + 1);
 
   return (
-    <div>
-        <a href="" onClick={(e)=>{
-          e.preventDefault()
-          console.log(id)}}>
-          <img
-            src={`${baseUrl}${posterSize}${poster_path}`}
-            alt={title}
-            style={{ maxWidth: `${movie_card_width}px` }}
-          />
-        </a>
+    <div className={isHovered ? `bg-[#ffffff] relative  w-fit ${isLiked ? "text-red-400" : "text-gray-400"}` : "relative" } id="movieCard">
+      <a
+        href=""
+        onClick={(e) => {
+          e.preventDefault();
+          console.log(poster_path);
+        }}
+        onMouseEnter={() => {
+          setIsHovered(true);
+        }}
+        onMouseLeave={() => {
+          setIsHovered(false);
+        }}
+      >
+        <img
+          className={isHovered ? "bg-white opacity-70" : ""}
+          src={`${baseUrl}${posterSize}${poster_path}`}
+          alt={title}
+          style={{ maxWidth: `${movie_card_width}px`, aspectRatio: '2/3' }}
+        />
+            {isHovered && (
+              <button className="text-xl border border-slate-400 bg-gray-100 rounded-full aspect-square absolute top-2 right-2 w-[2.5rem] flex justify-center items-center" onClick={likeUnlikeFunction}>
+                <FaHeart id="heartIcon" className="transform transition duration-300 active:scale-75"/>
+              </button>
+            )}
+      </a>
     </div>
   );
 };

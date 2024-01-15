@@ -1,5 +1,5 @@
 import { AxiosError, AxiosResponse } from "axios";
-import { IMovieDetail, IMovieList } from "../services/interface";
+import { IMovieDetail, IMovieList } from "./interface";
 
 export interface IResponseList {
   status: number | undefined;

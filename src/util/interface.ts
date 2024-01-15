@@ -15,6 +15,14 @@ export interface IMovieList {
     vote_count: number;
 };
 
+export interface IMovieListLandingPage {
+  popular: IMovieList[];
+  action: IMovieList[];
+  adventure: IMovieList[];
+  family: IMovieList[];
+  romance: IMovieList[];
+}
+
 export interface IMovieDetail {
     adult: boolean
     backdrop_path: string

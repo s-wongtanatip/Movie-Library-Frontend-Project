@@ -1,3 +1,6 @@
+/// <reference types="vite-plugin-svgr/client" />
+import TmdbLogo from "../assets/tmdb.svg?react";
+
 const footerItems = [
   "FAQ",
   "Help Center",
@@ -27,14 +30,21 @@ const Footer = () => {
           {footerItems.map((text) => {
             return (
               <span key={text}>
-                <a href="" className="text-gray-600" onClick={e => e.preventDefault()}>
+                <a
+                  href=""
+                  className="text-gray-600"
+                  onClick={(e) => e.preventDefault()}
+                >
                   {text}
                 </a>
               </span>
             );
           })}
         </div>
-        <div className="flex justify-end mt-10">
+        <div className="flex justify-between mt-10">
+          <div className="w-[5%] opacity-60">
+            <TmdbLogo />
+          </div>
           <div className="flex flex-col">
             <span>Developed by Supasit Wongtanatip</span>
             <span>icons</span>

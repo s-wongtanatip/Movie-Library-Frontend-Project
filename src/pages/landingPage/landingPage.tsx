@@ -3,16 +3,9 @@ import {
   getMovieListByGenre,
   getPopularMovieList,
 } from "../../services/services";
-import { IMovieList } from "../../services/interface";
 import CarouselSection from "../../components/carouselSection";
+import { IMovieListLandingPage } from "../../util/interface";
 
-export interface IMovieListLandingPage {
-  popular: IMovieList[];
-  action: IMovieList[];
-  adventure: IMovieList[];
-  family: IMovieList[];
-  romance: IMovieList[];
-}
 
 export const cardNum = Math.floor(window.innerWidth / 200);
 
@@ -50,6 +43,8 @@ const LandingPage = () => {
     }
   };
 
+  const displayCategory = Object.keys(movies);
+
   useEffect(() => {
     setIsLoading(true);
     callData();
@@ -65,36 +60,16 @@ const LandingPage = () => {
 
   return (
     <main>
-      <CarouselSection
-        movies={movies.popular}
-        card_per_carousel={cardNum}
-        category="popular"
-        isLoading={isLoading}
-      />
-      <CarouselSection
-        movies={movies.action}
-        card_per_carousel={cardNum}
-        category="action"
-        isLoading={isLoading}
-      />
-      <CarouselSection
-        movies={movies.adventure}
-        card_per_carousel={cardNum}
-        category="adventure"
-        isLoading={isLoading}
-      />
-      <CarouselSection
-        movies={movies.family}
-        card_per_carousel={cardNum}
-        category="family"
-        isLoading={isLoading}
-      />
-      <CarouselSection
-        movies={movies.romance}
-        card_per_carousel={cardNum}
-        category="romance"
-        isLoading={isLoading}
-      />
+      {displayCategory.map((category) => {
+        return (
+          <CarouselSection
+            movies={movies[category as keyof typeof movies]}
+            card_per_carousel={cardNum}
+            category={category as keyof typeof movies}
+            isLoading={isLoading}
+          />
+        );
+      })}
     </main>
   );
 };
