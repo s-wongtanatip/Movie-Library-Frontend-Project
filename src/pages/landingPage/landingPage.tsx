@@ -5,7 +5,7 @@ import {
 } from "../../services/services";
 import CarouselSection from "../../components/carouselSection";
 import { IMovieListLandingPage } from "../../util/interface";
-
+import BackdropSection from "../../components/backdropSection";
 
 export const cardNum = Math.floor(window.innerWidth / 200);
 
@@ -17,7 +17,7 @@ const LandingPage = () => {
     family: [],
     romance: [],
   });
-  const [isLoading, setIsLoading] = useState<boolean>(false);
+  const [isLoading, setIsLoading] = useState<boolean>(true);
   const callData = async () => {
     const popularMovie = await getPopularMovieList();
     const actionMovie = await getMovieListByGenre("action");
@@ -60,9 +60,11 @@ const LandingPage = () => {
 
   return (
     <main>
+      <BackdropSection movies={movies.popular} isLoading={isLoading} />
       {displayCategory.map((category) => {
         return (
           <CarouselSection
+            key={category}
             movies={movies[category as keyof typeof movies]}
             card_per_carousel={cardNum}
             category={category as keyof typeof movies}

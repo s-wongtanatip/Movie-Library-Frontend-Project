@@ -52,4 +52,16 @@ const getMovieDetailFromId = async (id: number): Promise<IResponseDetail> => {
   }
 };
 
-export { getPopularMovieList, getMovieListByGenre, getMovieDetailFromId };
+const getMoviebyTitle = async (title: string): Promise<IResponseList> => {
+  try {
+    const result = await axios.get(
+      `https://api.themoviedb.org/3/search/movie?query=${title}&include_adult=false&language=en-US&page=1`,
+      headerConfig
+    );
+    return handleListResponse.success(result);
+  } catch (error: any) {
+    return handleListResponse.error(error);
+  }
+};
+
+export { getPopularMovieList, getMovieListByGenre, getMovieDetailFromId, getMoviebyTitle };

@@ -5,6 +5,7 @@ import MovieCard from "../../components/movieCard";
 import { cardNum } from "../landingPage/landingPage";
 import { useFavList } from "../../App";
 import { RiHeartAddFill } from "react-icons/ri";
+import { Link } from "react-router-dom";
 
 const MyfavPage = () => {
   const { state } = useFavList();
@@ -20,6 +21,11 @@ const MyfavPage = () => {
     setDetails(results);
   };
 
+  const cardWidth =
+    window.innerWidth / (Math.floor(window.innerWidth / 200) + 1);
+
+  const gap = (window.innerWidth - 80 - cardNum * cardWidth) / (cardNum - 1);
+
   useEffect(() => {
     fetchDetailFunction(favList);
   }, [favList]);
@@ -31,24 +37,31 @@ const MyfavPage = () => {
 
   return (
     <main className="my-16 mx-10 min-h-[80vh] flex flex-col">
-      <div className="text-3xl font-bold mb-6 capitalize">My List</div>
+      <div className="text-3xl font-bold mb-6 capitalize">My List <span className="font-light">- {favList.length}</span></div>
       {favList.length ? (
         <div
           className="grid"
-          style={{ gridTemplateColumns: `repeat(${cardNum}, minmax(0, 1fr))` }}
+          style={{
+            gridTemplateColumns: `repeat(${cardNum}, minmax(0, ${cardWidth}px))`,
+            gap: `${gap}px`
+          }}
         >
-          {" "}
           {details.length ? (
             <>
               {details.map((movie) => {
                 return (
-                  <MovieCard
-                    title={movie.title}
-                    poster_path={movie.poster_path}
-                    card_per_carousel={cardNum}
-                    id={movie.id}
-                    key={movie.id}
-                  />
+                  <div
+                    className="justify-self-center"
+                    style={{ maxWidth: `${cardWidth}px` }}
+                  >
+                    <MovieCard
+                      title={movie.title}
+                      poster_path={movie.poster_path}
+                      cardWidth={cardWidth}
+                      id={movie.id}
+                      key={movie.id}
+                    />
+                  </div>
                 );
               })}
             </>
@@ -59,7 +72,7 @@ const MyfavPage = () => {
                   <div
                     key={num}
                     className="bg-gray-800 aspect-[2/3] animate-pulse"
-                    style={{ width: `${window.innerWidth / (cardNum + 1)}px`}}
+                    style={{ width: `${window.innerWidth / (cardNum + 1)}px` }}
                   ></div>
                 );
               })}
@@ -70,7 +83,9 @@ const MyfavPage = () => {
         <>
           <div className="flex flex-col justify-center flex-auto text-center">
             <div className="text-[50px] flex justify-center mb-10">
-              <RiHeartAddFill />
+              <Link to="/">
+                <RiHeartAddFill />
+              </Link>
             </div>
             <span>
               Your list is empty... Find interesting movies on Homepage !

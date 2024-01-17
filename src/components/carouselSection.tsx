@@ -2,7 +2,8 @@ import { IMovieList } from "../util/interface";
 import MovieCard from "./movieCard";
 import { IoIosArrowBack, IoIosArrowForward } from "react-icons/io";
 import { useState } from "react";
-import { IMovieListLandingPage } from "../pages/landingPage/landingPage";
+import { IMovieListLandingPage } from "../util/interface";
+import { cardNum } from "../pages/landingPage/landingPage";
 
 // Define card per panel for calculating MovieCard width
 // const card_per_carousel = 8;
@@ -33,12 +34,12 @@ const CarouselSection = ({ movies, card_per_carousel, category, isLoading }: Pro
   //     console.log(scroll);
   //   },[scroll])
 
+  // Calculate card width
+  const cardWidth = window.innerWidth / (card_per_carousel + 1);
+
   // Calculate gap used for styling
   const gap =
-    (window.innerWidth -
-      (window.innerWidth * card_per_carousel) / (card_per_carousel + 1) -
-      60) /
-    (card_per_carousel + 1);
+    Math.round((window.innerWidth - (cardWidth * card_per_carousel) - 60) / (card_per_carousel + 1));
 
   //Array for looping empty div (for loading-effect component)
   const cardCountArray: number[] = [];
@@ -47,15 +48,16 @@ const CarouselSection = ({ movies, card_per_carousel, category, isLoading }: Pro
   }
 
   return (
-    <section className="mb-16">
-      <div className="text-3xl font-bold ml-10 mb-6 mt-16 capitalize">
+    <section className="mb-16 mt-10">
+      <div className="text-3xl font-bold ml-10 mb-6 capitalize">
         {category} list
       </div>
       <section className="overflow-hidden relative mx-auto">
         <div
           className="overflow-hidden"
           style={{
-            width: `${window.innerWidth - (60 + gap)}px`,
+            // width: `${window.innerWidth - (60 + gap)}px`,
+            width: `${cardNum * (gap + cardWidth)}px`,
             marginLeft: `${30}px`,
           }}
         >
@@ -79,7 +81,7 @@ const CarouselSection = ({ movies, card_per_carousel, category, isLoading }: Pro
                       key={movie.title}
                       title={movie.title}
                       poster_path={movie.poster_path}
-                      card_per_carousel={card_per_carousel}
+                      cardWidth={cardWidth}
                       id={movie.id}
                     />
                   );
@@ -89,18 +91,20 @@ const CarouselSection = ({ movies, card_per_carousel, category, isLoading }: Pro
 
         {/* Slide buttons */}
 
-        <div className="absolute top-0 h-full left-[5px]">
+        <div className="absolute top-0 h-full left-[7px]">
           <button
             className="w-[30px] h-full flex justify-center items-center text-2xl"
             onClick={prevPage}
+            disabled={isLoading}
           >
             <IoIosArrowBack />
           </button>
         </div>
-        <div className="absolute top-0 h-full right-[5px]">
+        <div className="absolute top-0 h-full right-[7px]">
           <button
             className="w-[30px] h-full flex justify-center items-center text-2xl"
             onClick={nextPage}
+            disabled={isLoading}
           >
             <IoIosArrowForward />
           </button>

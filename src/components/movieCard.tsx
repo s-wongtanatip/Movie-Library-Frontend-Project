@@ -8,11 +8,11 @@ const posterSize = "w780"; // [ "w92", "w154", "w185", "w342", "w500", "w780", "
 type Props = {
   title: string;
   poster_path: string;
-  card_per_carousel: number;
+  cardWidth: number;
   id: number;
 };
 
-const MovieCard = ({ title, poster_path, card_per_carousel, id }: Props) => {
+const MovieCard = ({ title, poster_path, cardWidth, id }: Props) => {
   const { state, setState } = useFavList();
   const favList = state
   const setFavList = setState
@@ -36,15 +36,14 @@ const MovieCard = ({ title, poster_path, card_per_carousel, id }: Props) => {
     setIsLiked(liked => !liked)
   }
 
-  const movie_card_width = window.innerWidth / (card_per_carousel + 1);
+  // const cardWidth = window.innerWidth / (card_per_carousel + 1);
 
   return (
-    <div className={isHovered ? `bg-[#ffffff] relative  w-fit ${isLiked ? "text-red-400" : "text-gray-400"}` : "relative" } id="movieCard">
+    <div id="movieCard"  className={`relative hover:bg-[#ffffff] ${isLiked ? "text-red-400" : "text-gray-400"}`}>
       <a
         href=""
         onClick={(e) => {
           e.preventDefault();
-          console.log(poster_path);
         }}
         onMouseEnter={() => {
           setIsHovered(true);
@@ -57,11 +56,11 @@ const MovieCard = ({ title, poster_path, card_per_carousel, id }: Props) => {
           className={isHovered ? "bg-white opacity-70" : ""}
           src={`${baseUrl}${posterSize}${poster_path}`}
           alt={title}
-          style={{ maxWidth: `${movie_card_width}px`, aspectRatio: '2/3' }}
+          style={{ maxWidth: `${cardWidth}px`, aspectRatio: '2/3' }}
         />
             {isHovered && (
-              <button className="text-xl border border-slate-400 bg-gray-100 rounded-full aspect-square absolute top-2 right-2 w-[2.5rem] flex justify-center items-center" onClick={likeUnlikeFunction}>
-                <FaHeart id="heartIcon" className="transform transition duration-300 active:scale-75"/>
+              <button className="text-xl bg-gray-100 rounded-full aspect-square absolute top-2 right-2 w-[2.5rem] flex justify-center items-center" onClick={likeUnlikeFunction}>
+                <FaHeart id="heartIcon" className="transition duration-300 active:scale-75"/>
               </button>
             )}
       </a>
