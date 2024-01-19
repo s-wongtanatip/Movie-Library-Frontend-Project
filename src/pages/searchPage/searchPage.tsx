@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { cardNum } from "../landingPage/landingPage";
+import DropdownCheckbox from "../../components/dropdownCheckbox";
 
 const SearchPage = () => {
   const [searchKey, setSearchKey] = useState<string>("");
@@ -7,13 +8,16 @@ const SearchPage = () => {
     <main className="my-16 mx-10 min-h-[80vh] flex flex-col">
       <section id="searchBar" className="mb-10 flex justify-center">
         <input
-          className="focus:outline-none"
+          className="focus:outline-none text-black"
           value={searchKey}
           placeholder="Enter title to search"
           onChange={(e) => {
             setSearchKey(e.target.value);
           }}
         />
+        <div>
+          <DropdownCheckbox/>
+        </div>
       </section>
       <section
         className="grid"

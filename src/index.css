@@ -7,18 +7,6 @@ body{
     box-sizing: border-box;
 }
 
-*{
-    color: white;
-}
-
-#movieCard *{
-    color: inherit;
-}
-
 body::-webkit-scrollbar {
     display: none;
-}
-
-#searchBar input{
-    color: black;
 }

@@ -76,7 +76,7 @@ const BackdropSection = ({ movies, isLoading }: Props) => {
           </div>
         </div>
       ) : (
-        <div className="w-screen overflow-scroll">
+        <div className="w-screen overflow-hidden">
           <div
             className="flex transition ease-in-out duration-[750ms]"
             style={{

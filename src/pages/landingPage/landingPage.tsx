@@ -50,14 +50,6 @@ const LandingPage = () => {
     callData();
   }, []);
 
-  //   useEffect(() => {
-  //     console.log("movies", movies);
-  //   }, [movies]);
-
-  //   useEffect(() => {
-  //     console.log("isLoading", isLoading);
-  //   }, [isLoading]);
-
   return (
     <main>
       <BackdropSection movies={movies.popular} isLoading={isLoading} />

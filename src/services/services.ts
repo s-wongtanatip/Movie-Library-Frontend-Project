@@ -64,4 +64,16 @@ const getMoviebyTitle = async (title: string): Promise<IResponseList> => {
   }
 };
 
-export { getPopularMovieList, getMovieListByGenre, getMovieDetailFromId, getMoviebyTitle };
+const getSimilarMovieList = async (id: number): Promise<IResponseList> => {
+  try {
+    const result = await axios.get(
+      `https://api.themoviedb.org/3/movie/${id}/similar?language=en-US&page=1`,
+      headerConfig
+    );
+    return handleListResponse.success(result);
+  } catch (error: any) {
+    return handleListResponse.error(error);
+  }
+};
+
+export { getPopularMovieList, getMovieListByGenre, getMovieDetailFromId, getMoviebyTitle, getSimilarMovieList };

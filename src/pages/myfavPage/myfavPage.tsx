@@ -8,8 +8,8 @@ import { RiHeartAddFill } from "react-icons/ri";
 import { Link } from "react-router-dom";
 
 const MyfavPage = () => {
-  const { state } = useFavList();
-  const favList = state;
+  const { favListState } = useFavList();
+  const favList = favListState;
   const [details, setDetails] = useState<IMovieDetail[]>([]);
 
   const fetchDetailFunction = async (list: number[]) => {

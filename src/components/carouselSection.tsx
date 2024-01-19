@@ -1,7 +1,7 @@
 import { IMovieList } from "../util/interface";
 import MovieCard from "./movieCard";
 import { IoIosArrowBack, IoIosArrowForward } from "react-icons/io";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { IMovieListLandingPage } from "../util/interface";
 import { cardNum } from "../pages/landingPage/landingPage";
 
@@ -11,7 +11,7 @@ import { cardNum } from "../pages/landingPage/landingPage";
 type Props = {
   movies: IMovieList[];
   card_per_carousel: number;
-  category: keyof IMovieListLandingPage;
+  category: string;
   isLoading: boolean;
 };
 
@@ -29,10 +29,9 @@ const CarouselSection = ({ movies, card_per_carousel, category, isLoading }: Pro
     }
   };
 
-  // FYI inspect scroll state
-  //   useEffect(()=>{
-  //     console.log(scroll);
-  //   },[scroll])
+  useEffect(()=>{
+    setScroll(0)
+  },[movies])
 
   // Calculate card width
   const cardWidth = window.innerWidth / (card_per_carousel + 1);

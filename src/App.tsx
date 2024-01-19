@@ -1,7 +1,17 @@
-import { Outlet, useOutletContext } from "react-router-dom";
+import { Outlet, useLocation, useOutletContext } from "react-router-dom";
 import Footer from "./components/footer";
 import NavBar from "./components/navBar";
 import { useEffect, useState } from "react";
+
+function ScrollToTop() {
+  const { pathname } = useLocation();
+
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, [pathname]);
+
+  return null;
+}
 
 const App = () => {
   const [favList, setFavList] = useState<number[]>(JSON.parse( window.localStorage.getItem("favoriteMovie") || "[]" ));
@@ -10,13 +20,11 @@ const App = () => {
       window.localStorage.setItem("favoriteMovie",JSON.stringify(favList))
   }, [favList]);
 
-  useEffect(() => {
-    console.log(favList);
-  }, [favList]);
   return (
     <>
       <NavBar />
-      <Outlet context={{ state: favList, setState: setFavList }} />
+      <ScrollToTop />
+      <Outlet context={{ favListState: favList, setFavListState: setFavList }} />
       <Footer />
     </>
   );
@@ -24,8 +32,9 @@ const App = () => {
 
 export function useFavList() {
   return useOutletContext<{
-    state: number[];
-    setState: React.Dispatch<React.SetStateAction<number[]>>;
+    favListState: number[];
+    setFavListState: React.Dispatch<React.SetStateAction<number[]>>;
   }>();
 }
+
 export default App;
