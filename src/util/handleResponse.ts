@@ -12,6 +12,12 @@ export interface IResponseList {
   err?: AxiosResponse<any, any> | undefined;
 }
 
+export interface IMultipleResponseList {
+  status: number | undefined;
+  data?: IMovieList[];
+  err?: AxiosResponse<any, any> | undefined;
+}
+
 const handleListResponse = {
   success: (res: AxiosResponse): IResponseList => {
     return {

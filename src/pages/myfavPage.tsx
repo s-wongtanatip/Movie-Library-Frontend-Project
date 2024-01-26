@@ -1,9 +1,9 @@
 import { useEffect, useState } from "react";
-import { getMovieDetailFromId } from "../../services/services";
-import { IMovieDetail } from "../../util/interface";
-import MovieCard from "../../components/movieCard";
-import { cardNum } from "../landingPage/landingPage";
-import { useFavList } from "../../App";
+import { getMovieDetailFromId } from "../services/services";
+import { IMovieDetail } from "../util/interface";
+import MovieCard from "../components/movieCard";
+import { cardNum } from "./landingPage";
+import { useFavList } from "../App";
 import { RiHeartAddFill } from "react-icons/ri";
 import { Link } from "react-router-dom";
 
@@ -30,10 +30,7 @@ const MyfavPage = () => {
     fetchDetailFunction(favList);
   }, [favList]);
 
-  const cardCountArray: number[] = [];
-  for (let i = 0; i < favList.length; i++) {
-    cardCountArray.push(i);
-  }
+  const cardCountArray: number[] = [...Array(favList.length).keys()];
 
   return (
     <main className="my-16 mx-10 min-h-[80vh] flex flex-col">
@@ -53,13 +50,13 @@ const MyfavPage = () => {
                   <div
                     className="justify-self-center"
                     style={{ maxWidth: `${cardWidth}px` }}
+                    key={movie.id}
                   >
                     <MovieCard
                       title={movie.title}
                       poster_path={movie.poster_path}
                       cardWidth={cardWidth}
                       id={movie.id}
-                      key={movie.id}
                     />
                   </div>
                 );
@@ -88,7 +85,7 @@ const MyfavPage = () => {
               </Link>
             </div>
             <span>
-              Your list is empty... Find interesting movies on Homepage !
+              Your list is empty . . . Find interesting movies on Homepage !
             </span>
           </div>
         </>

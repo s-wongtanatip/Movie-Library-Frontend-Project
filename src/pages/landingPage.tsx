@@ -1,17 +1,19 @@
 import { useEffect, useState } from "react";
 import {
   getMovieListByGenre,
+  getNowPlayingMovieList,
   getPopularMovieList,
-} from "../../services/services";
-import CarouselSection from "../../components/carouselSection";
-import { IMovieListLandingPage } from "../../util/interface";
-import BackdropSection from "../../components/backdropSection";
+} from "../services/services";
+import { IMovieListLandingPage } from "../util/interface";
+import BackdropSection from "../components/backdropSection";
+import CarouselSection from "../components/carouselSection";
 
 export const cardNum = Math.floor(window.innerWidth / 200);
 
 const LandingPage = () => {
   const [movies, setMovies] = useState<IMovieListLandingPage>({
     popular: [],
+    'now playing': [],
     action: [],
     adventure: [],
     family: [],
@@ -20,6 +22,7 @@ const LandingPage = () => {
   const [isLoading, setIsLoading] = useState<boolean>(true);
   const callData = async () => {
     const popularMovie = await getPopularMovieList();
+    const nowPlayingMovie = await getNowPlayingMovieList();
     const actionMovie = await getMovieListByGenre("action");
     const adventureMovie = await getMovieListByGenre("adventure");
     const familyMovie = await getMovieListByGenre("family");
@@ -27,6 +30,7 @@ const LandingPage = () => {
 
     if (
       popularMovie.data &&
+      nowPlayingMovie.data &&
       actionMovie.data &&
       adventureMovie.data &&
       familyMovie.data &&
@@ -34,6 +38,7 @@ const LandingPage = () => {
     ) {
       setMovies({
         popular: popularMovie.data.results,
+        'now playing': nowPlayingMovie.data.results,
         action: actionMovie.data.results,
         adventure: adventureMovie.data.results,
         family: familyMovie.data.results,
@@ -52,7 +57,7 @@ const LandingPage = () => {
 
   return (
     <main>
-      <BackdropSection movies={movies.popular} isLoading={isLoading} />
+      <BackdropSection movies={movies['now playing']} isLoading={isLoading} />
       {displayCategory.map((category) => {
         return (
           <CarouselSection

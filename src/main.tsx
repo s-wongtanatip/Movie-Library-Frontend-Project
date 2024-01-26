@@ -2,12 +2,12 @@ import React from "react";
 import ReactDOM from "react-dom/client";
 
 import App from "./App.tsx";
-import LandingPage from "./pages/landingPage/landingPage.tsx";
-import DetailPage from "./pages/detailPage/detailPage.tsx";
-import MyfavPage from "./pages/myfavPage/myfavPage.tsx";
-import SearchPage from "./pages/searchPage/searchPage.tsx";
+import LandingPage from "./pages/landingPage.tsx";
+import DetailPage from "./pages/detailPage.tsx";
+import MyfavPage from "./pages/myfavPage.tsx";
+import SearchPage from "./pages/searchPage.tsx";
 
-import ErrorPage from "./pages/errorPage/errorPage.tsx";
+import ErrorPage from "./pages/errorPage.tsx";
 
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 

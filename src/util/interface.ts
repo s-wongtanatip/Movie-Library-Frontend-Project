@@ -17,6 +17,7 @@ export interface IMovieList {
 
 export interface IMovieListLandingPage {
   popular: IMovieList[];
+  'now playing': IMovieList[];
   action: IMovieList[];
   adventure: IMovieList[];
   family: IMovieList[];

@@ -43,12 +43,22 @@ const Footer = () => {
           })}
         </div>
         <div className="flex justify-between mt-10">
-          <div className="opacity-60 h-[50px] aspect-[2.334]">
+          <a className="opacity-60 h-[50px] aspect-[2.334]" href="https://developer.themoviedb.org/docs/getting-started" target="_blank">
             <TmdbLogo />
-          </div>
+          </a>
           <div className="flex flex-col">
             <span className="font-thin">Developed by Supasit Wongtanatip</span>
-            <div className="text-3xl flex justify-end items-center"><TiSocialLinkedin/><TiSocialGithub className="relative top-[2px]"/></div>
+            <div className="text-3xl flex justify-end items-center">
+              <a
+                href="https://linkedin.com/in/supasit-wongtanatip-b316a8205"
+                target="_blank"
+              >
+                <TiSocialLinkedin />
+              </a>
+              <a href="https://github.com/s-wongtanatip" target="_blank">
+                <TiSocialGithub className="relative top-[2px]" />
+              </a>
+            </div>
           </div>
         </div>
       </section>

@@ -1,12 +1,12 @@
 import { useLocation } from "react-router-dom";
 import { useEffect, useState } from "react";
-import { IMovieDetail, IMovieList } from "../../util/interface";
-import { getMovieDetailFromId } from "../../services/services";
-import CarouselSection from "../../components/carouselSection";
-import { getSimilarMovieList } from "../../services/services";
-import { cardNum } from "../landingPage/landingPage";
+import { IMovieDetail, IMovieList } from "../util/interface";
+import { getMovieDetailFromId } from "../services/services";
+import CarouselSection from "../components/carouselSection";
+import { getSimilarMovieList } from "../services/services";
+import { cardNum } from "./landingPage";
 import { FaStar } from "react-icons/fa6";
-import AddToListBtn from "../../components/addToListBtn";
+import AddToListBtn from "../components/addToListBtn";
 
 const baseUrl = "http://image.tmdb.org/t/p/";
 const posterSize = "original"; // [ "w92", "w154", "w185", "w342", "w500", "w780", "original" ]
@@ -42,7 +42,7 @@ const DetailPage = () => {
       <section className="mx-auto flex min-h-[70vh] max-h-[75vh] max-w-[80vw] py-10">
         {isLoading ? (
           <div className="w-full flex justify-center items-center">
-            <Spinner/>
+            <Spinner />
           </div>
         ) : (
           <>
@@ -110,7 +110,7 @@ const DetailPage = () => {
                 <div className="pt-5">
                   {movieData.genres.map((genre) => {
                     return (
-                      <span className="bg-gray-700 rounded-full px-3 py-2 mr-3 font-thin text-sm">
+                      <span className="bg-gray-700 rounded-full px-3 py-2 mr-3 font-thin text-sm" key={genre.name}>
                         {genre.name}
                       </span>
                     );
@@ -118,18 +118,26 @@ const DetailPage = () => {
                 </div>
                 <div className="">
                   <div className="flex gap-10 justify-end text-end">
-                    <ul className="text-gray-400 text-base *:text-gray-500 *:text-sm">
-                      Production Country
-                      {movieData.production_countries.map((country) => (
-                        <li key={country.name}>{country.name}</li>
-                      ))}
-                    </ul>
-                    <ul className="text-gray-400 text-base *:text-gray-500 *:text-sm">
-                      Production Company
-                      {movieData.production_companies.map((company) => (
-                        <li key={company.name}>{company.name}</li>
-                      ))}
-                    </ul>
+                    {movieData.production_countries.length ? (
+                      <ul className="text-gray-400 text-base *:text-gray-500 *:text-sm">
+                        Production Country
+                        {movieData.production_countries.map((country) => (
+                          <li key={country.name}>{country.name}</li>
+                        ))}
+                      </ul>
+                    ) : (
+                      ""
+                    )}
+                    {movieData.production_companies.length ? (
+                      <ul className="text-gray-400 text-base *:text-gray-500 *:text-sm">
+                        Production Company
+                        {movieData.production_companies.map((company) => (
+                          <li key={company.name}>{company.name}</li>
+                        ))}
+                      </ul>
+                    ) : (
+                      ""
+                    )}
                   </div>
                 </div>
               </div>

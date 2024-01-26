@@ -1,9 +1,9 @@
-interface IGenres {
+export interface IGenres {
         id: number;
         name: string;
 }
 
-const genresList: IGenres[] = [
+export const genresList: IGenres[] = [
       {
         id: 28,
         name: "Action"

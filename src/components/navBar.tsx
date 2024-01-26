@@ -33,7 +33,7 @@ const NavBar = () => {
           </div>
         </div>
         <div className="flex-grow flex justify-end items-center text-2xl gap-5">
-          <Link to="/search">
+          <Link to="/search?page=1">
             <div className="flex items-center p-3 gap-3 rounded-full bg-transparent transition-all duration-400 hover:bg-gray-700 ">
               <FaMagnifyingGlass />
             </div>

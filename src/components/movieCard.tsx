@@ -49,17 +49,27 @@ const MovieCard = ({ title, poster_path, cardWidth, id }: Props) => {
       onMouseLeave={() => {
         setIsHovered(false);
       }}
+      style={{ maxWidth: `${cardWidth}px`}}
+      // onClick={()=>{console.log(id)}}
     >
-        <Link to={`/detail/${id}`} state={{ movieId: id }}>
-          {poster_path ? (<img
+      <Link to={`/detail/${id}`} state={{ movieId: id }}>
+        {poster_path ? (
+          <img
             className={isHovered ? "bg-white opacity-70" : ""}
             src={`${baseUrl}${posterSize}${poster_path}`}
             alt={title}
             style={{ maxWidth: `${cardWidth}px`, aspectRatio: "2/3" }}
-          />) : (<div className="bg-gray-800 aspect-[2/3] flex justify-center items-center" style={{width: `${cardWidth}px`}}>{title}</div>)}
-          
-        </Link>
-        {isHovered && (
+          />
+        ) : (
+          <div
+            className="bg-gray-800 aspect-[2/3] flex justify-center items-center text-center"
+            style={{ width: `${cardWidth}px` }}
+          >
+            {title}
+          </div>
+        )}
+      </Link>
+      {isHovered && (
           <button
             className="text-xl bg-gray-100 rounded-full aspect-square absolute top-2 right-2 w-[2.5rem] flex justify-center items-center"
             onClick={likeUnlikeFunction}
@@ -69,7 +79,7 @@ const MovieCard = ({ title, poster_path, cardWidth, id }: Props) => {
               className="transition duration-300 active:scale-75"
             />
           </button>
-        )}
+      )}
     </div>
   );
 };
