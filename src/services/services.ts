@@ -13,7 +13,7 @@ import { IMovieList } from "../util/interface";
 const headerConfig = {
   headers: {
     Authorization:
-      `Bearer ${import.meta.env.API_KEY}`,
+      `Bearer ${import.meta.env.VITE_API_KEY}`,
     accept: "application/json",
   },
 };
