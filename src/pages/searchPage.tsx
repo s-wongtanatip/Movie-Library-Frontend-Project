@@ -124,7 +124,7 @@ const SearchPage = () => {
   }, [genreFilter, sortBy, movieList]);
 
   return (
-    <main className="my-16 mx-5 min-[425px]:mx-auto min-h-[80vh] flex flex-col items-center justify-start w-fit">
+    <main className="my-16 px-5 sm:px-0 mx-auto min-h-[80vh] flex flex-col items-center justify-start w-fit">
       <section
         id="searchBar"
         className="w-[80vw] flex justify-center gap-3 flex-wrap md:flex-nowrap"
