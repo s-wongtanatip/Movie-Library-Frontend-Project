@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import axios from "axios";
 import {
   IMultipleResponseList,
@@ -12,7 +13,7 @@ import { IMovieList } from "../util/interface";
 const headerConfig = {
   headers: {
     Authorization:
-      "Bearer eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiI5ZGUzZDEwZmUyMzBjZDkwZjE1YzYyNDZmM2U4NDA0OCIsInN1YiI6IjY1OWY4ZmVkMmZkZWM2MDEyYTM2ZWY5NiIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.PB7tdE9u82OTBFah27Gz1jndcKeWvHT3QqbzDfyI1XM",
+      `Bearer ${import.meta.env.API_KEY}`,
     accept: "application/json",
   },
 };
@@ -104,7 +105,7 @@ const getMovieBySearch = async (searchKey: string, page: number = 1): Promise<IR
 
 const getResultMultiplePages = async (getType: string, page: number,title?: string): Promise<IMultipleResponseList>  => {
   try {
-    let totalResult: IMovieList[] = [];
+    const totalResult: IMovieList[] = [];
     for(let i = 0; i < page; i++){
       let link = '';
       switch (getType) {

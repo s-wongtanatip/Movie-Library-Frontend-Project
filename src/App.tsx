@@ -18,14 +18,29 @@ const App = () => {
   // Random movie to display on backdrop
   const movieDispNum = 5;
 
-  const randNumArr = [...Array(movieDispNum)].map(()=>Math.floor(Math.random() * 20));
-  const randNumArrUnique = randNumArr.map((n,index) => {
-    if(randNumArr.indexOf(n) !== index){
-      return [0,1,2,3,4,5,6,7].filter(n => !randNumArr.includes(n))[index - randNumArr.indexOf(n) - 1]
-    }else{
-      return n
-    }
-  })
+  // const randNumArr = [...Array(movieDispNum)].map(()=>Math.floor(Math.random() * 20));
+  // const randNumArrUnique = randNumArr.map((n,index) => {
+  //   if(randNumArr.indexOf(n) !== index){
+  //     return [0,1,2,3,4,5,6,7].filter(n => !randNumArr.includes(n))[index - randNumArr.indexOf(n) - 1]
+  //   }else{
+  //     return n
+  //   }
+  // })
+
+  function generateUniqueRandomNumbers(length:number) {
+    // Create an array of length range from 0 to 20
+    const allNumbers = Array.from({length: 21}, (_, index) => index);
+    
+    // Use the Array.prototype.sort() method to shuffle the array
+    allNumbers.sort(() => Math.random() - 0.5);
+    
+    // Slice the shuffled array to get the desired number of unique random numbers
+    const uniqueNumbers = allNumbers.slice(0, length);
+    
+    return uniqueNumbers;
+}
+
+const randNumArrUnique = generateUniqueRandomNumbers(movieDispNum)
   
   const [favList, setFavList] = useState<number[]>(JSON.parse( window.localStorage.getItem("favoriteMovie") || "[]" ));
   const [randNum, setRandNum] = useState<number[]>(randNumArrUnique)
