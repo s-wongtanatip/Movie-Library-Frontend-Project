@@ -17,7 +17,7 @@ type Props = {
 const CarouselSection = ({ movies, isLoading, cardNum, category }: Props) => {
   const card_per_carousel = Math.max(cardNum,3)
   
-  const ref = useRef<Slider>();
+  const ref = useRef<Slider>(null);
   const settings: Settings = {
     arrows: false,
     dots: false,
