@@ -2,6 +2,10 @@
 @tailwind components;
 @tailwind utilities;
 
+:root {
+    font-size: clamp(12px, calc(0.75rem + ((1vw - 7.68px) * 0.3472)), 16px);
+  }
+
 body{
     background-color: rgb(17, 17, 17);
     box-sizing: border-box;

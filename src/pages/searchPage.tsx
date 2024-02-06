@@ -79,8 +79,8 @@ const SearchPage = () => {
           break;
         case "Release Date":
           displayedListArr.sort((a, b) => {
-            let a1 = a.release_date.split("-").join("");
-            let b1 = b.release_date.split("-").join("");
+            const a1 = a.release_date.split("-").join("");
+            const b1 = b.release_date.split("-").join("");
             return b1 > a1 ? 1 : b1 < a1 ? -1 : 0;
           });
           break;
@@ -124,7 +124,7 @@ const SearchPage = () => {
   }, [genreFilter, sortBy, movieList]);
 
   return (
-    <main className="my-16 mx-auto min-h-[80vh] flex flex-col items-center justify-center w-fit">
+    <main className="my-16 mx-5 min-[425px]:mx-auto min-h-[80vh] flex flex-col items-center justify-start w-fit">
       <section
         id="searchBar"
         className="w-[80vw] flex justify-center gap-3 flex-wrap md:flex-nowrap"
@@ -176,7 +176,7 @@ const SearchPage = () => {
           </div>
         </div>
       </section>
-      <section className="my-10 flex gap-10 h-9 w-full justify-start">
+      <section className="my-10 flex sm:gap-10 min-h-9 h-fit w-[80vw] sm:w-[60vw] justify-between max-w-[1200px]">
         {params.get("search")?.length ? (
           <div className="flex justify-between font-thin">
             <div>
@@ -202,12 +202,12 @@ const SearchPage = () => {
           ""
         )}
         {genreFilter.length ? (
-          <div className="flex justify-between font-thin">
-            <div>
+          <div className="flex justify-between font-thin h-fit max-w-[50%]">
+            <div className="h-fit">
               Filter :
               {genreFilter.map((genre) => (
                 <span
-                  className="bg-gray-700 rounded-full px-3 py-2 ml-3 text-sm inline-flex"
+                  className="bg-gray-700 rounded-full px-3 py-2 ml-3 text-sm inline-flex mb-3"
                   key={genre}
                 >
                   {genre}

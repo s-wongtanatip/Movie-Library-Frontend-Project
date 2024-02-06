@@ -58,7 +58,7 @@ const MovieCard = ({ title, poster_path, cardWidth, id }: Props) => {
             className={isHovered ? "bg-white opacity-70" : ""}
             src={`${baseUrl}${posterSize}${poster_path}`}
             alt={title}
-            style={{ maxWidth: `${cardWidth}px`, aspectRatio: "2/3" }}
+            style={{ maxWidth: `${cardWidth}px`, aspectRatio: "2/3",width: "100%" }}
           />
         ) : (
           <div

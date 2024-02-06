@@ -39,22 +39,21 @@ const DetailPage = () => {
 
   return (
     <main>
-      <section className="mx-auto flex min-h-[70vh] max-h-[75vh] max-w-[80vw] py-10">
+      <section className="px-5 mx-auto sm:px-0 sm:flex sm:w-[80vw] max-w-[1500px] py-10">
         {isLoading ? (
           <div className="w-full flex justify-center items-center">
             <Spinner />
           </div>
         ) : (
           <>
-            <div
-              id="image"
-              className="max-w-[25vw] flex-none flex justify-center"
-            >
-              <img src={`${baseUrl}${posterSize}${movieData.poster_path}`} />
+            <div id="image" className="w-full sm:w-1/3 flex justify-center">
+              <div className="aspect-[2/3] max-w-full">
+                <img src={`${baseUrl}${posterSize}${movieData.poster_path}`} />
+              </div>
             </div>
             <div
               id="detailBox"
-              className="flex-grow px-20 grid grid-rows-[1fr_1fr_2.5fr] h-auto"
+              className="pt-5 w-full sm:w-2/3 sm:px-20 sm:pt-0 grid grid-rows-[1fr_1fr_2.5fr] aspect-[4/3]"
             >
               <div className="top-part">
                 <div className="pb-3">
@@ -110,13 +109,16 @@ const DetailPage = () => {
                 <div className="pt-5">
                   {movieData.genres.map((genre) => {
                     return (
-                      <span className="bg-gray-700 rounded-full px-3 py-2 mr-3 font-thin text-sm" key={genre.name}>
+                      <span
+                        className="bg-gray-700 rounded-full px-3 py-2 mr-3 font-thin text-sm"
+                        key={genre.name}
+                      >
                         {genre.name}
                       </span>
                     );
                   })}
                 </div>
-                <div className="">
+                <div className="pt-20">
                   <div className="flex gap-10 justify-end text-end">
                     {movieData.production_countries.length ? (
                       <ul className="text-gray-400 text-base *:text-gray-500 *:text-sm">
@@ -148,7 +150,7 @@ const DetailPage = () => {
       <section className="">
         <CarouselSection
           movies={similarMovList}
-          card_per_carousel={cardNum}
+          cardNum={cardNum}
           category="Similar Movie"
           isLoading={isLoading}
         />

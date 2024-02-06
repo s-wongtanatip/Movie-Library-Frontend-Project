@@ -24,7 +24,7 @@ const MyfavPage = () => {
   const cardWidth =
     window.innerWidth / (Math.floor(window.innerWidth / 200) + 1);
 
-  const gap = (window.innerWidth - 80 - cardNum * cardWidth) / (cardNum - 1);
+  // const gap = (window.innerWidth - 80 - cardNum * cardWidth) / (cardNum - 1);
 
   useEffect(() => {
     fetchDetailFunction(favList);
@@ -33,14 +33,15 @@ const MyfavPage = () => {
   const cardCountArray: number[] = [...Array(favList.length).keys()];
 
   return (
-    <main className="my-16 mx-10 min-h-[80vh] flex flex-col">
+    <main className="mx-5 min-[375px]:my-16 min-[375px]:mx-10 min-h-[80vh] flex flex-col">
       <div className="text-3xl font-bold mb-6 capitalize">My List <span className="font-light">- {favList.length}</span></div>
       {favList.length ? (
         <div
-          className="grid"
+          className="grid max-w-full gap-x-[1rem] gap-y-[1rem]"
           style={{
-            gridTemplateColumns: `repeat(${cardNum}, minmax(0, ${cardWidth}px))`,
-            gap: `${gap}px`
+            // gridTemplateColumns: `repeat(${cardNum}, minmax(0, ${cardWidth}px))`,
+            gridTemplateColumns: `repeat(max(${cardNum},2), 1fr)`,
+            // gap: `${gap}px`
           }}
         >
           {details.length ? (
@@ -49,7 +50,8 @@ const MyfavPage = () => {
                 return (
                   <div
                     className="justify-self-center"
-                    style={{ maxWidth: `${cardWidth}px` }}
+                    // style={{ maxWidth: `${cardWidth}px` }}
+                    style={{ maxWidth: '100%' }}
                     key={movie.id}
                   >
                     <MovieCard
@@ -68,8 +70,7 @@ const MyfavPage = () => {
                 return (
                   <div
                     key={num}
-                    className="bg-gray-800 aspect-[2/3] animate-pulse"
-                    style={{ width: `${window.innerWidth / (cardNum + 1)}px` }}
+                    className="bg-gray-800 aspect-[2/3] animate-pulse w-full"
                   ></div>
                 );
               })}

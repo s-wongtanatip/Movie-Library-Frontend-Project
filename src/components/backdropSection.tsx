@@ -35,7 +35,7 @@ const BackdropSection = ({ movies, isLoading }: Props) => {
   }, [currentSlide]);
 
   return (
-    <section>
+    <section className="hidden md:block">
       {isLoading ? (
         <section className="w-screen aspect-[2.7] px-10 flex">
           <div className="h-[100%] aspect-[16/9] bg-gray-800 animate-pulse"></div>

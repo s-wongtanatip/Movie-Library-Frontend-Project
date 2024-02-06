@@ -1,7 +1,7 @@
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 
-import Slider from "react-slick";
+import Slider, { Settings } from "react-slick";
 import { IMovieList } from "../util/interface";
 import MovieCard from "./movieCard";
 import { IoIosArrowBack, IoIosArrowForward } from "react-icons/io";
@@ -10,20 +10,22 @@ import { useRef } from "react";
 type Props = {
   movies: IMovieList[];
   isLoading: boolean;
-  card_per_carousel: number;
+  cardNum: number;
   category: string;
 };
 
-const CarouselSection = ({ movies, isLoading, card_per_carousel, category }: Props) => {
-  const ref = useRef<any>();
-  var settings = {
+const CarouselSection = ({ movies, isLoading, cardNum, category }: Props) => {
+  const card_per_carousel = Math.max(cardNum,3)
+  
+  const ref = useRef<Slider>();
+  const settings: Settings = {
     arrows: false,
     dots: false,
     infinite: true,
     speed: 700,
     slidesToShow: card_per_carousel,
     slidesToScroll: card_per_carousel,
-    swipe: false
+    swipe: true
   };
 
   // Calculate card width
@@ -33,7 +35,7 @@ const CarouselSection = ({ movies, isLoading, card_per_carousel, category }: Pro
   const cardCountArray: number[] = [...Array(card_per_carousel * 2).keys()];
 
   return (
-    <section className="mb-16 mt-10">
+    <section className="md:mb-16 mt-10">
       <div className="text-3xl font-bold mx-10 mb-6 capitalize whitespace-pre">
         {movies.length ? `${category} list` : ' '}
       </div>
@@ -70,7 +72,7 @@ const CarouselSection = ({ movies, isLoading, card_per_carousel, category }: Pro
         <div className="absolute top-0 h-full left-[7px]">
           <button
             className="w-[30px] h-full flex justify-center items-center text-2xl"
-            onClick={() => ref.current.slickPrev()}
+            onClick={() => ref.current?.slickPrev()}
           >
             <IoIosArrowBack />
           </button>
@@ -78,7 +80,7 @@ const CarouselSection = ({ movies, isLoading, card_per_carousel, category }: Pro
         <div className="absolute top-0 h-full right-[7px]">
           <button
             className="w-[30px] h-full flex justify-center items-center text-2xl"
-            onClick={() => ref.current.slickNext()}
+            onClick={() => ref.current?.slickNext()}
           >
             <IoIosArrowForward />
           </button>

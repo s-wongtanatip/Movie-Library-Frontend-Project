@@ -8,7 +8,7 @@ import { IMovieListLandingPage } from "../util/interface";
 import BackdropSection from "../components/backdropSection";
 import CarouselSection from "../components/carouselSection";
 
-export const cardNum = Math.floor(window.innerWidth / 200);
+export const cardNum = Math.round(window.innerWidth / 200);
 
 const LandingPage = () => {
   const [movies, setMovies] = useState<IMovieListLandingPage>({
@@ -63,7 +63,7 @@ const LandingPage = () => {
           <CarouselSection
             key={category}
             movies={movies[category as keyof typeof movies]}
-            card_per_carousel={cardNum}
+            cardNum={cardNum}
             category={category as keyof typeof movies}
             isLoading={isLoading}
           />

@@ -26,24 +26,30 @@ const Footer = () => {
   return (
     <footer id="footer">
       <section className="bg-[#151515] px-10 py-14">
-        <div className="text-gray-600">Question? Call 1-844-505-2993</div>
-        <div className="grid grid-cols-4 gap-5 mt-14">
-          {footerItems.map((text) => {
-            return (
-              <span key={text}>
-                <a
-                  href=""
-                  className="text-gray-600"
-                  onClick={(e) => e.preventDefault()}
-                >
-                  {text}
-                </a>
-              </span>
-            );
-          })}
+        <div className="hidden sm:block">
+          <div className="text-gray-600">Question? Call 1-844-505-2993</div>
+          <div className="grid grid-cols-4 gap-5 mt-14">
+            {footerItems.map((text) => {
+              return (
+                <span key={text}>
+                  <a
+                    href=""
+                    className="text-gray-600"
+                    onClick={(e) => e.preventDefault()}
+                  >
+                    {text}
+                  </a>
+                </span>
+              );
+            })}
+          </div>
         </div>
-        <div className="flex justify-between mt-10">
-          <a className="opacity-60 h-[50px] aspect-[2.334]" href="https://developer.themoviedb.org/docs/getting-started" target="_blank">
+        <div className="min-[425px]:flex min-[425px]:justify-between text-end mt-10">
+          <a
+            className="opacity-60 h-[50px] aspect-[2.334] hidden min-[425px]:block"
+            href="https://developer.themoviedb.org/docs/getting-started"
+            target="_blank"
+          >
             <TmdbLogo />
           </a>
           <div className="flex flex-col">
