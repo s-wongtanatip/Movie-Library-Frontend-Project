@@ -28,8 +28,8 @@ const App = () => {
   // })
 
   function generateUniqueRandomNumbers(length:number) {
-    // Create an array of length range from 0 to 20
-    const allNumbers = Array.from({length: 21}, (_, index) => index);
+    // Create an array of length range from 0 to 19
+    const allNumbers = Array.from({length: 20}, (_, index) => index);
     
     // Use the Array.prototype.sort() method to shuffle the array
     allNumbers.sort(() => Math.random() - 0.5);

@@ -1,6 +1,7 @@
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import { FaMagnifyingGlass, FaHeart } from "react-icons/fa6";
 import { IoMdArrowRoundBack } from "react-icons/io";
+import IMAGES from "../assets/Images";
 
 const NavBar = () => {
   const navigate = useNavigate();
@@ -26,7 +27,7 @@ const NavBar = () => {
             <Link to="/">
               <img
                 className="max"
-                src="https://image.tmdb.org/t/p/original/wwemzKWzjKYJFfCeiB57q3r4Bcm.svg"
+                src={IMAGES.logo}
                 alt="logo"
               />
             </Link>

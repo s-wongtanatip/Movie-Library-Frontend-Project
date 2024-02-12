@@ -68,7 +68,7 @@ const BackdropSection = ({ movies, isLoading }: Props) => {
             {randNum.map(i => movies[i]).map((movie) => {
               return (
                 <BackdropPoster
-                  key={movie.title}
+                  key={movie.id}
                   movie={movie}
                   circleBtn={randCount}
                   currentSlide={currentSlide}
